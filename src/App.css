@@ -1,0 +1,196 @@
+/* StartPage.css */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Arial", sans-serif;
+  /* background-color: #585757; */
+}
+
+/* 
+.dark {
+  background-color: #333;
+  color: white;
+}
+
+.light {
+  background-color: #f2f2f2;
+  color: black;
+} */
+
+.background {
+  top: 0;
+  left: 0;
+  width: 100%;
+  position: fixed;
+  height: 100vh;
+  z-index: -1;
+  background-color: #333;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: none;
+  color: white;
+}
+
+.layout a {
+  color: white;
+  text-decoration: none;
+}
+
+.layout a:hover {
+  text-decoration: underline;
+}
+
+img {
+  width: 1rem;
+  height: 1rem;
+  margin: 0.3rem;
+}
+
+img:hover {
+  cursor: pointer;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0.8rem;
+}
+
+.time {
+  font-size: 6.5rem;
+  margin: 0;
+  font-weight: bold;
+}
+
+.date {
+  font-size: 2.5rem;
+  margin: 0;
+  font-weight: bold;
+}
+
+.greeting {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.search-box {
+  margin: 1rem 0;
+}
+
+.search-box input {
+  width: 390px;
+  max-width: 80vw;
+  padding: 0.5rem 1rem;
+  font-size: 1.4rem;
+  border: none;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  outline: none;
+}
+
+.search-box input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.quote {
+  font-size: 1.2rem;
+  width: 80vw;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* margin-top: 1rem; */
+}
+
+footer {
+  position: fixed;
+  bottom: 1rem;
+  font-size: 0.8rem;
+}
+
+footer > img {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: 0.5rem;
+}
+
+footer > div:first-child {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  font-size: 0.95rem;
+}
+
+footer > div:last-child {
+  position: fixed;
+  bottom: 2.2rem;
+  left: 47.5vw;
+}
+
+/* Clock */
+
+.clock > svg {
+  width: 200px;
+  height: 200px;
+}
+
+.clock > svg > * {
+  stroke: #fff;
+}
+
+.clock > svg > line {
+  stroke-linecap: round;
+  stroke-width: 2;
+  transform-origin: 50px 50px;
+  transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Configuration */
+.modal {
+  display: flex;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #333;
+}
+
+.modal-content {
+  background-color: white;
+  margin: auto;
+  padding: 15px;
+  border: 1px solid #ccc;
+  width: 80%;
+  max-width: 500px;
+}
+
+.modal-content > textarea {
+  width: 95%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.modal-content > .modal-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
