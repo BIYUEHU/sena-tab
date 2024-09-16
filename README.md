@@ -70,5 +70,5 @@ Licensed under the GNU General Public License v3.0.
 
 ## 🖼️ Screenshots
 
-![screenshot1](https://pic.imgdb.cn/item/66e7eb2bd9c307b7e91c52af.png)
-![screenshot2](https://pic.imgdb.cn/item/66e7eb2bd9c307b7e91c52ee.png)
+![screenshot1](https://files.superbed.cn/proxy/7468686c6f2633337a7570796f326f696c796e7e7978327f72336f68736e793375717d7b796f33292e337979332a2a792b797e2e7e78257f2f2c2b7e2b79252d7f292e7979326c727b.png)
+![screenshot2](https://files.superbed.cn/proxy/7468686c6f2633337a7570796f326f696c796e7e7978327f72336f68736e793375717d7b796f33292e337d7a332a2a792b797e2e7e78257f2f2c2b7e2b79252d7f292e7d7a326c727b.png)
