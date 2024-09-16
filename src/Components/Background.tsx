@@ -5,6 +5,7 @@ import ArrowLeft from '@/assets/arrow-left.svg'
 import ArrowRight from '@/assets/arrow-right.svg'
 import Play from '@/assets/play.svg'
 import Pause from '@/assets/pause.svg'
+import { t } from '@/i18n'
 
 interface BackgroundProps {
   settings: Settings['background']
@@ -80,9 +81,26 @@ const Background: React.FC<BackgroundProps> = ({ settings }) => {
         <div>
           {settings.type === 'unsplash' && (
             <>
-              {isUnsplashFirstIndex() || <img src={ArrowLeft} alt="icon" onClick={() => getUnsplashBackground(-1)} />}
-              <img src={backgroundPlaying ? Pause : Play} alt="icon" onClick={() => toggleBackgroundPlaying()} />
-              <img src={ArrowRight} alt="icon" onClick={() => getUnsplashBackground(1)} />
+              {isUnsplashFirstIndex() || (
+                <img
+                  src={ArrowLeft}
+                  alt={t`unsplash.previous`}
+                  title={t`unsplash.previous`}
+                  onClick={() => getUnsplashBackground(-1)}
+                />
+              )}
+              <img
+                src={backgroundPlaying ? Pause : Play}
+                alt={t`unsplash.play`}
+                title={t`unsplash.play`}
+                onClick={() => toggleBackgroundPlaying()}
+              />
+              <img
+                src={ArrowRight}
+                alt={t`unsplash.next`}
+                title={t`unsplash.next`}
+                onClick={() => getUnsplashBackground(1)}
+              />
             </>
           )}
         </div>

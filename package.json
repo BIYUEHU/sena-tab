@@ -1,12 +1,12 @@
 {
-  "name": "new-tab",
+  "name": "sena-tab",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "license": "GPL-3.0-only",
   "scripts": {
     "dev": "vite --host",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {

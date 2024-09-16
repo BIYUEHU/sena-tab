@@ -10,11 +10,15 @@ import Widgets from '@/Components/Widgets'
 import Configuration from './Components/Configuration'
 import { useState } from 'react'
 import { settingsSchema } from './store/schema'
+import i18n, { f, t } from '@/i18n'
 
 const App: React.FC = () => {
-  const [isOpenConfiguration, setIsOpenConfiguration] = useState(false)
-  const settings = useStore((state) => state.settings)
   const language = useStore((state) => state.settings.language)
+  i18n.set(language)
+  document.title = t`app.title`
+
+  const settings = useStore((state) => state.settings)
+  const [isOpenConfiguration, setIsOpenConfiguration] = useState(false)
   const backgroundMask = useStore((state) => state.cache.backgroundMask)
   const toggleBackgroundMask = useStore((state) => state.toggleBackgroundMask)
   const setSettings = useStore((state) => state.setSettings)
@@ -24,34 +28,57 @@ const App: React.FC = () => {
     try {
       json = JSON.parse(content)
     } catch (e) {
-      alert(`Invalid JSON format: ${e instanceof Error ? e.message : e}`)
+      alert(f('configuration.jsonError', e instanceof Error ? e.message : String(e)))
       return
     }
     const result = settingsSchema.parseSafe(json)
     if (!result.value) {
-      alert(`Invalid configuration: ${result.error.message}`)
+      alert(f('configuration.formatError', result.error.message))
       return
     }
     setSettings(result.data)
-    alert('Settings saved successfully')
+    alert(t`configuration.save`)
     setIsOpenConfiguration(false)
   }
+
+  // Register header icon keyboard shortcuts
+  document.addEventListener('keydown', (event) => {
+    if (isOpenConfiguration) return
+    switch (event.key) {
+      case 'c':
+        setIsOpenConfiguration(true)
+        break
+      // TODO: fix this
+      // case 'm':
+      //   setTimeout(() => toggleBackgroundMask(), 0)
+      //   break
+      case 'f':
+        document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen()
+        break
+      default:
+    }
+  })
 
   return (
     <div className="layout">
       <Background settings={settings.background} />
       <header>
-        <img src={Settings} alt="Settings" title="Settings" onClick={() => setIsOpenConfiguration(true)} />
+        <img
+          src={Settings}
+          alt={t`icon.settings`}
+          title={t`icon.settings`}
+          onClick={() => setIsOpenConfiguration(true)}
+        />
         <img
           src={backgroundMask ? EyeOff : Eye}
           onClick={() => toggleBackgroundMask()}
-          alt="Toggle Mask"
-          title="Toggle Mask"
+          alt={t`icon.mask`}
+          title={t`icon.mask`}
         />
         <img
           src={document.fullscreenElement ? Minimize : Maximize}
-          alt="Toggle Fullscreen"
-          title="Toggle Fullscreen"
+          alt={t`icon.fullscreen`}
+          title={t`icon.fullscreen`}
           onClick={() =>
             document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen()
           }

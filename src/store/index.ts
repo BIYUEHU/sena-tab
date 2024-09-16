@@ -57,7 +57,7 @@ export const DEFAULT_SETTINGS: Settings = {
     },
     {
       type: 'quote',
-      quote: 'hitokoto'
+      quote: 'ce'
     }
   ],
   language: 'en_US'
@@ -171,7 +171,7 @@ const useStore = create<StoreState>()(
       }
     }),
     {
-      name: 'new-tab',
+      name: 'sena-tab',
       storage: createJSONStorage(() => localStorage)
     }
   )

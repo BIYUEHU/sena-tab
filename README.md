@@ -1,50 +1,74 @@
-# React + TypeScript + Vite
+# Sena Tab
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<!-- markdownlint-disable -->
 
-Currently, two official plugins are available:
+<div align="center">
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[![wakatime](https://wakatime.com/badge/user/018dc603-712a-4205-a226-d4c9ccd0d02b/project/36a5afde-cf6a-4dc5-be29-2774a98fd427.svg)](https://wakatime.com/badge/user/018dc603-712a-4205-a226-d4c9ccd0d02b/project/36a5afde-cf6a-4dc5-be29-2774a98fd427)
+[![Build](https://github.com/BIYUEHU/sena-tab/actions/workflows/build.yml/badge.svg)](https://github.com/BIYUEHU/sena-tab/actions/workflows/build.yml)
 
-## Expanding the ESLint configuration
+🧊 A lightweight, high-looking, simple and fresh, customizable, new tab page plug-in for Google Chrome specially designed
+for programmers. 🧊
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+</div>
 
-- Configure the top-level `parserOptions` property like this:
+<!-- markdownlint-enable -->
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 🔦 Usage
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Browser Extension
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+You can install the `sena-tab` extension from the [Chrome Web Store](https://chrome.google.com/webstore/detail/sena-tab/kckjnk).
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+### Webpage
+
+You can also use the `sena-tab` webpage by visiting [https://st.hotaru.icu](https://st.hotaru.icu).
+
+## ⚙️ Features
+
+- Customizable widgets
+- Customizable background effect (blur, luminosity)
+- Customizable background type
+  - Solid color
+  - Gradient color
+  - Bing image of the day
+  - Unsplash image
+  - Custom image (local or internet)
+- Customizable time format
+  - 12-hour format
+  - 24-hour format
+  - analog clock
+- Customizable greeting message
+- Customizable quote api
+- Customizable search engine
+- Internationalization (i18n) support
+
+## 🌏 Supported Languages
+
+- English
+- 日本語 (Japanese)
+- 繁體中文 (Traditional Chinese)
+- ~~简体中文 (Simplified Zhinese)~~
+
+## ✍ TODO
+
+- [ ] Customizable widgets position
+- [ ] Customizable widgets size
+- [ ] Customizable widgets font size and other styles
+- [ ] Weather widget
+- [ ] Location widget
+- [ ] Rebuild by vue Angular18
+
+## ❓ About
+
+`Sena` comes from the character **姬野星奏(Himeno Sena)** in the Japanese visual novel
+[恋×シンアイ彼女(Koi x Shin Ai Kanojo)](https://vndb.org/v17516).
+
+## 📕 License
+
+Licensed under the GNU General Public License v3.0.
+
+## 🖼️ Screenshots
+
+![screenshot1](https://pic.imgdb.cn/item/66e7eb2bd9c307b7e91c52af.png)
+![screenshot2](https://pic.imgdb.cn/item/66e7eb2bd9c307b7e91c52ee.png)

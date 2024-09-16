@@ -2,21 +2,16 @@ import { ENGINES, QUOTES } from '@/constants/mapping'
 import type { Settings } from '@/store/schema'
 import { Fragment, useEffect, useState } from 'react'
 import Clock from './Widgets/Clock'
+import { f, t } from '@/i18n'
 
 interface WidgetsProps {
   widgets: Settings['widgets']
   language: Settings['language']
 }
 
-const getComma = (language: string) =>
-  ({
-    zh_CN: '，',
-    ja_JP: '、'
-  })[language] ?? ','
-
 const Widgets: React.FC<WidgetsProps> = ({ widgets, language }) => {
   const [currentTime, setCurrentTime] = useState(new Date())
-  const [greeting, setGreeting] = useState('')
+  const [greetingNum, setGreetingNum] = useState(0)
   const [quote, setQuote] = useState('')
   const [isSetQuote, setIsSetQuote] = useState(false)
 
@@ -26,12 +21,16 @@ const Widgets: React.FC<WidgetsProps> = ({ widgets, language }) => {
       clearTimeout(timer)
     }, 1000)
 
-    setGreeting(
+    setGreetingNum(
       (() => {
         const hour = currentTime.getHours()
-        if (hour < 12) return 'Good morning'
-        if (hour < 18) return 'Good afternoon'
-        return 'Good evening'
+        if (hour >= 0 && hour < 3) return 0
+        if (hour >= 3 && hour < 6) return 1
+        if (hour >= 6 && hour < 10) return 2
+        if (hour >= 10 && hour < 14) return 3
+        if (hour >= 14 && hour < 18) return 4
+        if (hour >= 18 && hour < 22) return 5
+        return 6
       })()
     )
   }, [currentTime])
@@ -84,8 +83,10 @@ const Widgets: React.FC<WidgetsProps> = ({ widgets, language }) => {
           case 'greeting':
             element = (
               <h1 className="greeting">
-                {greeting}
-                {widget.name && `${getComma(language)}${widget.name}`}
+                {f(
+                  widget.name ? `greeting.withName.${greetingNum}` : `greeting.withoutName.${greetingNum}`,
+                  widget.name
+                )}
               </h1>
             )
             break
@@ -96,7 +97,7 @@ const Widgets: React.FC<WidgetsProps> = ({ widgets, language }) => {
               <div className="search-box">
                 <input
                   type="text"
-                  placeholder={result?.name ? `Search on ${result.name}` : 'Search something'}
+                  placeholder={result?.name ? f('search.placeholder.0', result.name) : t`search.placeholder.1`}
                   onKeyPress={(event) => handleSearch(event, result?.search_url ?? widget.engine)}
                 />
               </div>
@@ -105,9 +106,13 @@ const Widgets: React.FC<WidgetsProps> = ({ widgets, language }) => {
           case 'quote':
             if (!isSetQuote) {
               setIsSetQuote(true)
-              const quoteType = QUOTES[widget.quote as 'yan']
+              const quoteType: number = QUOTES[widget.quote as 'yan']
               if (quoteType) {
-                fetch(`https://api.hotaru.icu/api/words?format=text&msg=${quoteType}`)
+                fetch(
+                  quoteType === 15
+                    ? 'https://api.hotaru.icu/api/ce?format=text&type=english'
+                    : `https://api.hotaru.icu/api/words?format=text&msg=${quoteType}`
+                )
                   .then((res) => res.text())
                   .then((res) => setQuote(res))
               } else {
@@ -124,6 +129,7 @@ const Widgets: React.FC<WidgetsProps> = ({ widgets, language }) => {
             element = <div className="quote" dangerouslySetInnerHTML={{ __html: quote }} />
             break
           default:
+            // TODO: more types of widgets
             element = <div>Unknown widget type: {widget.type}</div>
         }
         return <Fragment key={index.toFixed()}>{element}</Fragment>

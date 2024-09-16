@@ -1,3 +1,5 @@
+export const REFER_URL = 'https://github.com/BIYUEHU/sena-tab/blob/master/src/store/schema.ts#L9-L100'
+
 export const QUOTES = {
   yan: 1,
   saohua: 2,

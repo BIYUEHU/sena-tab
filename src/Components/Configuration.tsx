@@ -1,3 +1,5 @@
+import { REFER_URL } from '@/constants/mapping'
+import { f, t } from '@/i18n'
 import { useState } from 'react'
 
 interface ConfigurationProps {
@@ -15,19 +17,28 @@ const Configuration: React.FC<ConfigurationProps> = ({ state, initial, onSave, o
       {state && (
         <div className="modal">
           <div className="modal-content">
-            <h2>Configuration</h2>
+            <h2>{t`configuration.title`}</h2>
+            <p
+              // biome-ignore lint:
+              dangerouslySetInnerHTML={{
+                __html: f(
+                  'configuration.tips',
+                  `<a style="color: #007bff;" href="${REFER_URL}" target="_blank">👉#</a>`
+                )
+              }}
+            />
             <textarea
               value={content}
               onChange={(e) => setContent(e.target.value)}
               rows={20}
-              placeholder="Why not add a configuration?"
+              placeholder={t`configuration.placeholder`}
             />
             <div className="modal-footer">
               <button type="button" onClick={() => onSave(content)}>
-                Save
+                {t`configuration.saveBtn`}
               </button>
               <button type="button" onClick={() => onCancel(content)}>
-                Cancel
+                {t`configuration.cancelBtn`}
               </button>
             </div>
           </div>
