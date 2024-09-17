@@ -18,7 +18,7 @@ for programmers. 🧊
 
 ### Browser Extension
 
-You can install the `sena-tab` extension from the [Chrome Web Store](https://chrome.google.com/webstore/detail/sena-tab/kckjnk).
+You can install the `sena-tab` extension from the [Release](https://github.com/BIYUEHU/sena-tab/releases).
 
 ### Webpage
 
