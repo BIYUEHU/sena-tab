@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "SenaTab - A high-looking New Tab",
+  "short_name": "sena-tab",
+  "version": "1.0.0",
+  "description": "A lightweight, high-looking, simple and fresh, customizable, new tab page plug-in for Google Chrome specially designed for programmers.",
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "icons": {
+    "32": "icons/icon.png",
+    "48": "icons/icon.png",
+    "96": "icons/icon.png",
+    "128": "icons/icon.png"
+  },
+  "permissions": [
+    "storage"
+  ]
+}
