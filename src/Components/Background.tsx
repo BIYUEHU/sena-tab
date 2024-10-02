@@ -18,13 +18,12 @@ const Background: React.FC<BackgroundProps> = ({ settings }) => {
   const getUnsplashBackground = useStore((state) => state.getUnsplashBackground)
   const isUnsplashFirstIndex = useStore((state) => state.isUnsplashFirstIndex)
   const isUnsplashUpdatedExpired = useStore((state) => state.isUnsplashUpdatedExpired)
-  const unsplashIndex = useStore((state) => state.cache.unsplashIndex)
   const getBingBackground = useStore((state) => state.getBingBackground)
   const [isLight, setIsLight] = useState(false)
   const [style, setStyle] = useState<React.CSSProperties>({})
   const [info, setInfo] = useState('')
+  const [isNext, setIsNext] = useState(false)
 
-  // biome-ignore lint:
   useEffect(() => {
     const generateMaskStyle = ({ blur, luminosity }: { blur: number; luminosity: number }): React.CSSProperties => {
       if (!backgroundMask) return {}
@@ -32,18 +31,15 @@ const Background: React.FC<BackgroundProps> = ({ settings }) => {
       return { filter: `blur(${blur}px)`, transform: `scale(${blur * 0.002} + 1)`, opacity: Math.abs(luminosity / 100) }
     }
 
-    if (isUnsplashUpdatedExpired()) {
-      getUnsplashBackground(1)
-    }
-
     switch (settings.type) {
       case 'unsplash':
-        getUnsplashBackground(0).then((result) => {
+        getUnsplashBackground(isNext ? 1 : 0).then((result) => {
           setStyle({ backgroundImage: `url(${result.url})`, ...generateMaskStyle(settings) })
           setInfo(
             /* html */ `<a href="${result.htmlLink}" target="_blank">Photo</a>, <a href="${result.userLink}" target="_blank">${result.user}</a>, <a href="https://unsplash.com" target="_blank">Unsplash</a>`
           )
         })
+        if (isNext) setIsNext(false)
         break
       case 'bing':
         getBingBackground().then((result) => {
@@ -68,7 +64,11 @@ const Background: React.FC<BackgroundProps> = ({ settings }) => {
         setStyle({ backgroundColor: settings.color })
         break
     }
-  }, [settings, backgroundMask, getUnsplashBackground, getBingBackground, unsplashIndex, isUnsplashFirstIndex])
+  }, [settings, backgroundMask, getUnsplashBackground, getBingBackground, isNext])
+
+  setInterval(() => {
+    if (isUnsplashUpdatedExpired()) setIsNext(true)
+  }, 1000)
 
   return (
     <>
