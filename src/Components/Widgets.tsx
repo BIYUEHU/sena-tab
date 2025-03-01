@@ -116,11 +116,11 @@ const Widgets: React.FC<WidgetsProps> = ({ widgets, language }) => {
                   .then((res) => res.text())
                   .then((res) => setQuote(res))
               } else {
-                fetch('https://hotaru.icu/api/hitokoto/v2/')
+                fetch('https://hotaru.icu/api/hitokoto')
                   .then((res) => res.json())
                   .then((res) => {
                     setQuote(
-                      /* html */ `<a href="https://hotaru.icu/hitokoto.html?id=${btoa(String(res.data.id))}" target="_blank">${res.data.msg.length > 100 ? `${res.data.msg.substring(0, 100)}...` : res.data.msg}${res.data.from ? ` — ${res.data.from}` : ''}</a>`
+                      /* html */ `<a href="https://hotaru.icu/hitokoto/${res.id}" target="_blank">${res.msg.length > 100 ? `${res.msg.substring(0, 100)}...` : res.msg}${res.from ? ` — ${res.from}` : ''}</a>`
                     )
                   })
               }
