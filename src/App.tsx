@@ -10,6 +10,7 @@ import Widgets from '@/Components/Widgets'
 import i18n, { f, t } from '@/i18n'
 import useStore from '@/store'
 import Configuration from './Components/Configuration'
+import type { Settings as SettingsType } from './store/schema'
 import { settingsSchema } from './store/schema'
 
 const App: React.FC = () => {
@@ -23,15 +24,8 @@ const App: React.FC = () => {
   const toggleBackgroundMask = useStore((state) => state.toggleBackgroundMask)
   const setSettings = useStore((state) => state.setSettings)
 
-  const handleConfigurationSave = (content: string) => {
-    let json: unknown
-    try {
-      json = JSON.parse(content)
-    } catch (e) {
-      alert(f('configuration.jsonError', e instanceof Error ? e.message : String(e)))
-      return
-    }
-    const result = settingsSchema.parseSafe(json)
+  const handleConfigurationSave = (next: SettingsType) => {
+    const result = settingsSchema.parseSafe(next)
     if (!result.value) {
       alert(f('configuration.formatError', result.error.message))
       return
@@ -87,7 +81,7 @@ const App: React.FC = () => {
       <main>
         {backgroundMask && <Widgets widgets={settings.widgets} language={language} />}
         <Configuration
-          initial={JSON.stringify(settings, null, 2)}
+          initial={settings}
           state={isOpenConfiguration}
           onSave={handleConfigurationSave}
           onCancel={() => setIsOpenConfiguration(false)}

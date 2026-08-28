@@ -20,9 +20,10 @@
     /* Extra */
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "types": ["node"]
   },
-  "include": ["src"],
+  "include": ["src", "scripts"],
   "references": [
     {
       "path": "./tsconfig.node.json"

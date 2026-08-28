@@ -5,7 +5,10 @@ html {
   padding: 0;
   height: 100%;
   font-family: "Arial", sans-serif;
-  /* background-color: #585757; */
+}
+
+body {
+  background: #333;
 }
 
 /* 
@@ -26,7 +29,6 @@ html {
   position: fixed;
   height: 100vh;
   z-index: -1;
-  background-color: #333;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -39,7 +41,6 @@ html {
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: none;
   color: white;
 }
 
@@ -210,4 +211,117 @@ footer > div:last-child {
 
 .modal-content > .modal-footer > button:active {
   background-color: #777;
+}
+
+.modal-content > .config-tabs {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 1rem;
+}
+
+.modal-content > .config-tabs > button {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #666;
+  border-bottom: 2px solid transparent;
+}
+
+.config-tabs > button.active {
+  color: #333;
+  border-bottom-color: #333;
+  font-weight: bold;
+}
+
+.config-body {
+  max-height: 55vh;
+  overflow-y: auto;
+}
+
+.config-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.field input,
+.field select {
+  padding: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.field-boolean {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.config-widget-card {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.config-widget-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.config-widget-card > .config-widget-header > .config-widget-actions > button {
+  border: 1px solid #ccc;
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 0.3rem;
+  padding: 0.2rem 0.5rem;
+}
+
+.config-add-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.config-add-btn {
+  border: 1px dashed #999;
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 0.4rem 0.7rem;
+}
+
+.config-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.config-links-row {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.config-links-row > input {
+  flex: 1;
+  padding: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.config-error {
+  color: #c0392b;
+  font-size: 0.85rem;
 }

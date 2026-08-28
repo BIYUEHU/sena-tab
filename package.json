@@ -5,22 +5,23 @@
   "type": "module",
   "license": "GPL-3.0-only",
   "scripts": {
+    "init": "bunx lefthook install",
     "dev": "vite --host",
-    "build": "vite build",
+    "build:only": "vite build",
+    "build": "vite build && bun scripts/build-extension.ts",
     "preview": "vite preview",
     "fix": "biome check --write"
   },
   "dependencies": {
     "@kotori-bot/i18n": "^1.3.3",
-    "mdui": "^2.1.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "swr": "^2.5.1",
     "tsukiko": "^1.4.2",
     "zustand": "^4.5.7"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.10",
+    "@types/bun": "^1.4.0",
     "@types/react": "^18.3.31",
     "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^4.7.0",

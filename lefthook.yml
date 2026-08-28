@@ -1,0 +1,6 @@
+pre-commit:
+  commands:
+    fix:
+      glob: "*.{ts,json}"
+      run: bun fix --staged
+      stage_fixed: true

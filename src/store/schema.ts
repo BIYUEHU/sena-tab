@@ -96,7 +96,7 @@ export const settingsSchema = Tsu.Object({
       })
     )
   ),
-  language: Tsu.Enum(Tsu.Literal('en_US'), Tsu.Literal('ja_JP'), Tsu.Literal('zh_TW'))
+  language: Tsu.Enum(Tsu.Literal('en_US'), Tsu.Literal('ja_JP'), Tsu.Literal('zh_TW'), Tsu.Literal('zh_CN'))
 })
 
 export type Settings = Tsu.infer<typeof settingsSchema>

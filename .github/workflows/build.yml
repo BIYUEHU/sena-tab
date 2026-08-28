@@ -2,8 +2,17 @@ name: Build
 
 on:
   push:
-    branches:
-      - master
+    branches: [master]
+    paths:
+      - "**.ts"
+      - "**.json"
+      - "**.yml"
+  pull_request:
+    branches: [master]
+    paths:
+      - "**.ts"
+      - "**.json"
+      - "**.yml"
   workflow_dispatch:
 
 permissions:
@@ -15,29 +24,29 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - uses: oven-sh/setup-bun@v1
+      - run: bun install --no-verify
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
-          run_install: true
+      - name: Check formatting
+        run: bun fix
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: pnpm
+      - name: Test
+        run: bun test
 
-      - name: Build site
-        run: pnpm build
+      - name: Build
+        run: bun run build
 
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v4
         with:
           target_branch: page
           build_dir: dist
-          fqdn: https://st.hotaru.icu
+          fqdn: https://t.himeno-sena.com
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload extension artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sena-tab-extension
+          path: extension/

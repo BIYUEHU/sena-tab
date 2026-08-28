@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from 'react'
-import { ENGINES, QUOTES } from '@/constants/mapping'
+import { ENGINES } from '@/constants/mapping'
 import { f, t } from '@/i18n'
 import type { Settings } from '@/store/schema'
 import Clock from './Widgets/Clock'
@@ -106,31 +106,33 @@ const Widgets: React.FC<WidgetsProps> = ({ widgets, language }) => {
           case 'quote':
             if (!isSetQuote) {
               setIsSetQuote(true)
-              const quoteType: number = QUOTES[widget.quote as 'yan']
-              if (quoteType) {
-                fetch(
-                  quoteType === 15
-                    ? 'https://api.hotaru.icu/api/ce?format=text&type=english'
-                    : `https://api.hotaru.icu/api/words?format=text&msg=${quoteType}`
-                )
-                  .then((res) => res.text())
-                  .then((res) => setQuote(res))
-              } else {
-                fetch('https://hotaru.icu/api/hitokoto')
-                  .then((res) => res.json())
-                  .then((res) => {
-                    setQuote(
-                      /* html */ `<a href="https://hotaru.icu/hitokoto/${res.id}" target="_blank">${res.msg.length > 100 ? `${res.msg.substring(0, 100)}...` : res.msg}${res.from ? ` — ${res.from}` : ''}</a>`
-                    )
-                  })
-              }
+              // const quoteType: number = QUOTES[widget.quote as 'yan']
+              // TODO: fetch supports more quotes types
+              // if (quoteType) {
+              //   fetch(
+              //     quoteType === 15
+              //       ? 'https://api.hotaru.icu/api/ce?format=text&type=english'
+              //       : `https://api.hotaru.icu/api/words?format=text&msg=${quoteType}`
+              //   )
+              //     .then((res) => res.text())
+              //     .then((res) => setQuote(res))
+              // } else {
+              fetch('https://i.arimuraromi.com/api/hitokoto')
+                .then((res) => res.json())
+                .then((res) => {
+                  const who = res.fromWho ? `${res.fromWho}「${res.from}」` : `「${res.from}」`
+                  const attribution = res.from ? ` — ${who}` : res.fromWho ? ` — ${res.fromWho}` : ''
+                  setQuote(
+                    /* html */ `<a href="https://i.arimuraromi.com/hitokoto/${res.uuid}" target="_blank">${res.msg.length > 100 ? `${res.msg.substring(0, 100)}...` : res.msg}${attribution}</a>`
+                  )
+                })
+              // }
             }
             // biome-ignore lint: *
             element = <div className="quote" dangerouslySetInnerHTML={{ __html: quote }} />
             break
           default:
-            // TODO: more types of widgets
-            element = <div>Unknown widget type: {widget.type}</div>
+            element = <div>{f('widget.unknown', widget.type)}</div>
         }
         return <Fragment key={index.toFixed()}>{element}</Fragment>
       })}

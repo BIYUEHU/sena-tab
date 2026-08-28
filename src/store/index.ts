@@ -134,7 +134,7 @@ const useStore = create<StoreState>()(
         if (cache.bingDate === new Date().getDate()) return [cache.bingUrl, cache.bingInfo]
 
         const { url, copyright } = (
-          await fetch('https://api.hotaru.icu/api/bing?format=json').then((res) => res.json())
+          await fetch('https://i.arimuraromi.com/api/utils/bing/json').then((res) => res.json())
         ).data
         set(({ cache }) => ({
           cache: {

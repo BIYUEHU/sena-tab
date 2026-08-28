@@ -28,24 +28,28 @@ const Background: React.FC<BackgroundProps> = ({ settings }) => {
     const generateMaskStyle = ({ blur, luminosity }: { blur: number; luminosity: number }): React.CSSProperties => {
       if (!backgroundMask) return {}
       if (luminosity < 0) setIsLight(true)
-      return { filter: `blur(${blur}px)`, transform: `scale(${blur * 0.002} + 1)`, opacity: Math.abs(luminosity / 100) }
+      return {
+        filter: `blur(${blur}px)`,
+        transform: `scale(${blur * 0.002} + 1)`,
+        opacity: Math.abs(luminosity / 100)
+      }
     }
 
     switch (settings.type) {
       case 'unsplash':
         getUnsplashBackground(isNext ? 1 : 0).then((result) => {
-          setStyle({ backgroundImage: `url(${result.url})`, ...generateMaskStyle(settings) })
+          setStyle({ backgroundImage: `url(${result?.url})`, ...generateMaskStyle(settings) })
           setInfo(
-            /* html */ `<a href="${result.htmlLink}" target="_blank">Photo</a>, <a href="${result.userLink}" target="_blank">${result.user}</a>, <a href="https://unsplash.com" target="_blank">Unsplash</a>`
+            /* html */ `<a href="${result?.htmlLink}" target="_blank">Photo</a>, <a href="${result?.userLink}" target="_blank">${result?.user}</a>, <a href="https://unsplash.com" target="_blank">Unsplash</a>`
           )
         })
         if (isNext) setIsNext(false)
         break
       case 'bing':
         getBingBackground().then((result) => {
-          setStyle({ backgroundImage: `url(${result[0]})`, ...generateMaskStyle(settings) })
+          setStyle({ backgroundImage: `url(${result?.[0]})`, ...generateMaskStyle(settings) })
           setInfo(
-            /* html */ `<a href="${result[0]}" target="_blank">${result[1]}</a>, <a href="https://bing.com" target="_blank">Bing</a>`
+            /* html */ `<a href="${result?.[0]}" target="_blank">${result?.[1]}</a>, <a href="https://bing.com" target="_blank">Bing</a>`
           )
         })
         break
