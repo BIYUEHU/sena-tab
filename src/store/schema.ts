@@ -1,5 +1,5 @@
+import { Tsu } from 'tsukiko'
 import { QUOTES } from '@/constants/mapping'
-import Tsu from 'tsukiko'
 
 const backgroundDisplaySchema = {
   blur: Tsu.Number().int().range(0, 50),

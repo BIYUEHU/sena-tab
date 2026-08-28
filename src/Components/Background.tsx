@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
-import useStore from '@/store'
-import type { Settings } from '@/store/schema'
 import ArrowLeft from '@/assets/arrow-left.svg'
 import ArrowRight from '@/assets/arrow-right.svg'
-import Play from '@/assets/play.svg'
 import Pause from '@/assets/pause.svg'
+import Play from '@/assets/play.svg'
 import { t } from '@/i18n'
+import useStore from '@/store'
+import type { Settings } from '@/store/schema'
 
 interface BackgroundProps {
   settings: Settings['background']
@@ -75,7 +75,7 @@ const Background: React.FC<BackgroundProps> = ({ settings }) => {
       <div className={`background ${isLight ? 'light' : 'dark'}`} style={style} />
       <footer>
         <div>
-          {/* biome-ignore lint: */}
+          {/* biome-ignore lint: * */}
           {['unsplash', 'bing'].includes(settings.type) && <div dangerouslySetInnerHTML={{ __html: info }} />}
         </div>
         <div>

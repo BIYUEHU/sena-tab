@@ -1,16 +1,16 @@
 import '@/App.css'
-import Settings from '@/assets/settings.svg'
-import Maximize from '@/assets/maximize.svg'
-import Minimize from '@/assets/minimize.svg'
+import { useState } from 'react'
 import Eye from '@/assets/eye.svg'
 import EyeOff from '@/assets/eye-off.svg'
+import Maximize from '@/assets/maximize.svg'
+import Minimize from '@/assets/minimize.svg'
+import Settings from '@/assets/settings.svg'
 import Background from '@/Components/Background'
-import useStore from '@/store'
 import Widgets from '@/Components/Widgets'
-import Configuration from './Components/Configuration'
-import { useState } from 'react'
-import { settingsSchema } from './store/schema'
 import i18n, { f, t } from '@/i18n'
+import useStore from '@/store'
+import Configuration from './Components/Configuration'
+import { settingsSchema } from './store/schema'
 
 const App: React.FC = () => {
   const language = useStore((state) => state.settings.language)

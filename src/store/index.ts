@@ -103,7 +103,7 @@ const useStore = create<StoreState>()(
         }
 
         if (!get().cache.unsplash[get().cache.unsplashIndex]) {
-          // biome-ignore lint:
+          // biome-ignore lint: *
           const res: any[] = await fetch('https://api.unsplash.com/photos/random?count=10&collections=1053828', {
             headers: {
               Authorization: 'Client-ID 1351e7003b0e869c6d7b221fe548c25216b16571ad28866446c06196ba1902d7'

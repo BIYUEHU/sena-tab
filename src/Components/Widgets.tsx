@@ -1,8 +1,8 @@
-import { ENGINES, QUOTES } from '@/constants/mapping'
-import type { Settings } from '@/store/schema'
 import { Fragment, useEffect, useState } from 'react'
-import Clock from './Widgets/Clock'
+import { ENGINES, QUOTES } from '@/constants/mapping'
 import { f, t } from '@/i18n'
+import type { Settings } from '@/store/schema'
+import Clock from './Widgets/Clock'
 
 interface WidgetsProps {
   widgets: Settings['widgets']
@@ -90,8 +90,7 @@ const Widgets: React.FC<WidgetsProps> = ({ widgets, language }) => {
               </h1>
             )
             break
-          case 'search':
-            // biome-ignore lint:
+          case 'search': {
             const result = ENGINES.find((el) => el.key === widget.engine)
             element = (
               <div className="search-box">
@@ -103,6 +102,7 @@ const Widgets: React.FC<WidgetsProps> = ({ widgets, language }) => {
               </div>
             )
             break
+          }
           case 'quote':
             if (!isSetQuote) {
               setIsSetQuote(true)
@@ -125,7 +125,7 @@ const Widgets: React.FC<WidgetsProps> = ({ widgets, language }) => {
                   })
               }
             }
-            // biome-ignore lint:
+            // biome-ignore lint: *
             element = <div className="quote" dangerouslySetInnerHTML={{ __html: quote }} />
             break
           default:

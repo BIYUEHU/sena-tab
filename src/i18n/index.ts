@@ -1,4 +1,4 @@
-import I18n from '@kotori-bot/i18n'
+import { I18n } from '@kotori-bot/i18n'
 import locales from './locales'
 
 const i18n = new I18n()
