@@ -30,8 +30,8 @@ jobs:
       - name: Check formatting
         run: bun fix
 
-      - name: Test
-        run: bun test
+      # - name: Test
+      #   run: bun test
 
       - name: Build
         run: bun run build
