@@ -22,8 +22,8 @@ const TYPE_OPTIONS = [
 ]
 
 const DEFAULTS_BY_TYPE: Record<Settings['background']['type'], Settings['background']> = {
-  url: { type: 'url', url: [''], blur: 0, luminosity: 0 },
-  bing: { type: 'bing', blur: 0, luminosity: 0 },
+  url: { type: 'url', url: [''], blur: 0, luminosity: 50 },
+  bing: { type: 'bing', blur: 0, luminosity: 50 },
   unsplash: { type: 'unsplash', minutes: 15, blur: 0, luminosity: -80 },
   'solid-color': { type: 'solid-color', color: '#333' },
   'gradient-color': { type: 'gradient-color', fromColor: '#333', toColor: '#666666', angle: 45 }
@@ -51,10 +51,7 @@ const BackgroundEditor: React.FC<BackgroundEditorProps> = ({ value, onChange }) 
             accept="image/*"
             onChange={(e) => {
               const file = e.target.files?.[0]
-              file &&
-                readFileAsDataUrl(file, (dataUrl) =>
-                  onChange({ ...value, url: [...value.url.filter(Boolean), dataUrl] })
-                )
+              file && readFileAsDataUrl(file, (dataUrl) => onChange({ ...value, url: [dataUrl] }))
               e.target.value = ''
             }}
           />

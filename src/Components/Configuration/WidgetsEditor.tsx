@@ -11,14 +11,6 @@ interface WidgetsEditorProps {
   onChange: (value: Settings['widgets']) => void
 }
 
-const TYPE_OPTIONS = [
-  { value: 'time' as const, label: t`config.widget.type.time` },
-  { value: 'greeting' as const, label: t`config.widget.type.greeting` },
-  { value: 'search' as const, label: t`config.widget.type.search` },
-  { value: 'quote' as const, label: t`config.widget.type.quote` },
-  { value: 'links' as const, label: t`config.widget.type.links` }
-]
-
 const DEFAULTS_BY_TYPE: Record<Widget['type'], Widget> = {
   time: { type: 'time', format: '24h', showDate: false, showMinutes: true, showSeconds: false },
   greeting: { type: 'greeting', name: '' },
@@ -27,24 +19,23 @@ const DEFAULTS_BY_TYPE: Record<Widget['type'], Widget> = {
   links: { type: 'links', showIcon: true, links: [] }
 }
 
-const TIME_FORMAT_OPTIONS = [
-  { value: 'clock' as const, label: t`config.widget.time.format.clock` },
-  { value: '12h' as const, label: t`config.widget.time.format.12h` },
-  { value: '24h' as const, label: t`config.widget.time.format.24h` }
-]
-
-const QUOTE_OPTIONS = [
-  { value: 'hitokoto' as const, label: t`config.widget.quote.hitokoto` },
-  ...(Object.keys(QUOTES) as (keyof typeof QUOTES)[]).map((key) => ({
-    value: key,
-    label: f(`config.widget.quote.${key}`)
-  })),
-  { value: 'custom' as const, label: t`config.widget.quote.custom` }
-]
-
 const SEARCH_ENGINE_OPTIONS = ENGINES.map(({ key, name }) => ({ value: key, label: name }))
 
 const WidgetFields: React.FC<{ widget: Widget; onChange: (widget: Widget) => void }> = ({ widget, onChange }) => {
+  const timeFormatOptions = [
+    { value: 'clock' as const, label: t`config.widget.time.format.clock` },
+    { value: '12h' as const, label: t`config.widget.time.format.12h` },
+    { value: '24h' as const, label: t`config.widget.time.format.24h` }
+  ]
+
+  const quoteOptions = [
+    { value: 'hitokoto' as const, label: t`config.widget.quote.hitokoto` },
+    ...(Object.keys(QUOTES) as (keyof typeof QUOTES)[]).map((key) => ({
+      value: key,
+      label: f(`config.widget.quote.${key}`)
+    })),
+    { value: 'custom' as const, label: t`config.widget.quote.custom` }
+  ]
   switch (widget.type) {
     case 'time':
       return (
@@ -52,7 +43,7 @@ const WidgetFields: React.FC<{ widget: Widget; onChange: (widget: Widget) => voi
           <SelectField
             label={t`config.widget.time.format`}
             value={widget.format}
-            options={TIME_FORMAT_OPTIONS}
+            options={timeFormatOptions}
             onChange={(format) => onChange({ ...widget, format })}
           />
           <BooleanField
@@ -95,7 +86,7 @@ const WidgetFields: React.FC<{ widget: Widget; onChange: (widget: Widget) => voi
           <SelectField
             label={t`config.widget.quote.source`}
             value={widget.quote}
-            options={QUOTE_OPTIONS}
+            options={quoteOptions}
             onChange={(quote) =>
               onChange(quote === 'custom' ? { type: 'quote', quote: 'custom', code: '' } : { type: 'quote', quote })
             }
@@ -186,7 +177,7 @@ const WidgetsEditor: React.FC<WidgetsEditorProps> = ({ value, onChange }) => {
       {value.map((widget, index) => (
         <div className="config-widget-card" key={`${widget.type}-${index.toFixed()}`}>
           <div className="config-widget-header">
-            <strong>{TYPE_OPTIONS.find((option) => option.value === widget.type)?.label ?? widget.type}</strong>
+            <strong>{widget.type}</strong>
             <div className="config-widget-actions">
               <button type="button" disabled={index === 0} onClick={() => moveAt(index, -1)}>
                 ↑
@@ -204,7 +195,13 @@ const WidgetsEditor: React.FC<WidgetsEditorProps> = ({ value, onChange }) => {
       ))}
       <div className="config-add-row">
         <select value={pendingType} onChange={(e) => setPendingType(e.target.value as Widget['type'])}>
-          {TYPE_OPTIONS.map((option) => (
+          {[
+            { value: 'time' as const, label: t`config.widget.type.time` },
+            { value: 'greeting' as const, label: t`config.widget.type.greeting` },
+            { value: 'search' as const, label: t`config.widget.type.search` },
+            { value: 'quote' as const, label: t`config.widget.type.quote` },
+            { value: 'links' as const, label: t`config.widget.type.links` }
+          ].map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}
             </option>
