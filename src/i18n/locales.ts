@@ -164,7 +164,7 @@ export default {
     'config.widget.quote.source': 'Quote Source',
     'config.widget.quote.custom': 'Custom',
     'config.widget.quote.code': 'Custom Code',
-    'config.widget.quote.hitokoto': 'Custom Hitokoto',
+    'config.widget.quote.hitokoto': 'Advanced Hitokoto',
     'config.widget.quote.yan': 'Hitokoto',
     'config.widget.quote.saohua': 'Flirty',
     'config.widget.quote.like': 'Sweet Talk',

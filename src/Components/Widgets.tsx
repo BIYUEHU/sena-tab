@@ -121,7 +121,7 @@ const Widgets: React.FC<WidgetsProps> = ({ widgets, language }) => {
               } else {
                 fetch(`https://i.arimuraromi.com/api/utils/words/${widget.quote}`)
                   .then((res) => res.json())
-                  .then((res) => setQuote(res.text ?? `${res.chinese ?? ''}${res.english ? ` — ${res.english}` : ''}`))
+                  .then((res) => setQuote(res.english ? `${res.english}<br/>${res.chinese}` : res.text))
               }
             }
             // biome-ignore lint: *
